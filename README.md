@@ -2,7 +2,7 @@
 
 ## Menu
 [Aula 1 - Conheça Babel](#aula-1--conheça-babel)  
-[Aula 2 - ](#aula-)  
+[Aula 2 - Compreenda os metodos de arrays ](#aula-2---compreenda-os-métodos-de-arrays)  
 [Aula 3 - ](#aula-)  
 [Aula 4 - ](#aula-)  
 [Aula 5 - ](#aula-)  
