@@ -125,3 +125,380 @@ Essas situações foram aproveitadas para demonstrar boas práticas de depuraç�
 * Criamos o arquivo `babel.config.json` com o preset simplificado;
 * Exploramos os sites **Can I Use** e **BrowserList** para verificar suporte dos navegadores;
 * Identificamos erros comuns de configuração e como resolvê-los.
+
+
+## Aula 2 - Compreenda os Métodos de Arrays
+
+### 🎯 Objetivos da aula
+
+* Compreender os diferentes métodos de array disponíveis no ES6+;
+* Praticar a iteração e transformação de arrays usando funções como `forEach`, `map`, `find`, `filter`, `reduce`, entre outras;
+* Aplicar esses métodos a exemplos práticos, entendendo suas diferenças e quando utilizá-los.
+
+---
+
+### 📦 Introdução aos arrays no ES6
+
+Com a chegada do ES6, os arrays passaram a contar com diversos métodos nativos que facilitaram a leitura, manipulação e análise de dados. Esses métodos tornam o código mais legível, expressivo e eficiente — além de favorecer uma programação funcional.
+
+Para dar início aos exemplos práticos, foi criado um array com nomes de redes sociais:
+
+```js
+const redesSociais = ['Facebook', 'Instagram', 'Twitter'];
+```
+
+---
+
+### 🔁 `for` tradicional vs `forEach`
+
+Antes do ES6, utilizava-se o loop `for` tradicional para percorrer arrays:
+
+```js
+for (let i = 0; i < redesSociais.length; i++) {
+  console.log(redesSociais[i]);
+}
+```
+
+Com o ES6, o método `forEach` passou a ser utilizado como uma alternativa mais simples:
+
+```js
+redesSociais.forEach(function(rede, indice) {
+  console.log(`${indice} - ${rede}`);
+});
+```
+
+📌 **Diferenciais do `forEach`**:
+
+* Mais legível;
+* Aceita uma função como parâmetro;
+* Permite acessar tanto o item quanto o índice;
+* **Não retorna nada** — apenas executa uma ação para cada elemento.
+
+---
+
+### 🧭 `map()` – Transformando os dados
+
+O `map()` é utilizado para **criar um novo array** a partir de transformações feitas nos elementos do array original.
+
+```js
+const numeros = [1, 2, 3, 4, 5];
+
+const dobro = numeros.map(function(numero) {
+  return numero * 2;
+});
+```
+
+📌 **Importante**:
+
+* O `map()` **retorna um novo array**;
+* É ideal para aplicar alterações nos itens;
+* Não altera o array original.
+
+---
+
+### 🔎 `find()` e `findIndex()`
+
+#### 🔍 `find()`
+
+Retorna **o primeiro item** que satisfaz uma condição:
+
+```js
+const aluno = alunos.find(function(item) {
+  return item.nome === 'Power';
+});
+```
+
+Se não encontrar nada, o retorno será `undefined`.
+
+#### 🔢 `findIndex()`
+
+Retorna o **índice do primeiro item** que satisfaz a condição:
+
+```js
+const indice = alunos.findIndex(function(item) {
+  return item.nome === 'Power';
+});
+```
+
+Se não houver correspondência, o retorno será `-1`.
+
+---
+
+### ✅ `every()` – Todos satisfazem?
+
+Verifica se **todos os elementos** do array atendem a uma condição:
+
+```js
+const todosFront = alunos.every(function(item) {
+  return item.curso === 'Front-end';
+});
+```
+
+* Retorna `true` se **todos** atenderem;
+* Retorna `false` se **pelo menos um** falhar.
+
+---
+
+### 🔍 `some()` – Algum satisfaz?
+
+Verifica se **algum elemento** do array atende à condição:
+
+```js
+const temBack = alunos.some(function(item) {
+  return item.curso === 'Back-end';
+});
+```
+
+* Retorna `true` se **pelo menos um** atender;
+* Retorna `false` se **nenhum** atender.
+
+---
+
+### 🧽 `filter()` – Selecionando múltiplos
+
+Diferente do `find()`, o `filter()` **retorna todas as ocorrências** que atendem à condição:
+
+```js
+const backEndAlunos = alunos.filter(function(item) {
+  return item.curso === 'Back-end';
+});
+```
+
+📌 `filter()` sempre retorna um array (vazio, se não houver itens que satisfaçam).
+
+---
+
+### 🔗 Usando múltiplas condições
+
+Tanto `some()` quanto `every()` (e outros) podem usar operadores como `&&` (E lógico) e `||` (OU lógico):
+
+```js
+const resultado = alunos.some(function(item) {
+  return item.curso === 'Front-end' || item.curso === 'Back-end';
+});
+```
+
+---
+
+### 🧠 Funções nomeadas
+
+Ao invés de escrever uma função anônima dentro de cada método, é possível criar funções nomeadas reutilizáveis:
+
+```js
+function ehFrontEnd(item) {
+  return item.curso === 'Front-end';
+}
+
+const resultado = alunos.filter(ehFrontEnd);
+```
+
+Essa prática:
+
+* Melhora a legibilidade;
+* Evita repetição de lógica;
+* Facilita testes e manutenção.
+
+---
+
+### 🧮 `reduce()` – Reduzindo tudo a um só valor
+
+O método `reduce()` permite transformar todo um array em **um único resultado**.
+
+```js
+const numeros = [1, 2, 3, 4, 5];
+
+const soma = numeros.reduce(function(acumulador, itemAtual) {
+  return acumulador + itemAtual;
+}, 0);
+```
+
+📌 Ele também pode ser usado para concatenar strings, criar somatórios de objetos ou gerar estruturas agregadas mais complexas.
+
+Exemplo prático:
+
+> Soma de valores em um carrinho de compras;
+> Montar uma frase a partir de um array de palavras.
+
+---
+
+### 📚 Revisão geral dos métodos de array
+
+| Método        | Função principal                                              |
+| ------------- | ------------------------------------------------------------- |
+| `forEach()`   | Executa algo para cada item, mas **não retorna valor**        |
+| `map()`       | Cria novo array com os itens **transformados**                |
+| `find()`      | Retorna **o primeiro item** que satisfaz a condição           |
+| `findIndex()` | Retorna o **índice do primeiro item** que satisfaz a condição |
+| `filter()`    | Retorna **todos os itens** que atendem à condição             |
+| `some()`      | Retorna `true` se **algum** item atender à condição           |
+| `every()`     | Retorna `true` se **todos** os itens atenderem à condição     |
+| `reduce()`    | Reduz o array a **um único valor**                            |
+| `push()`      | Adiciona um item ao final do array                            |
+
+---
+
+### ✅ Resumo da Aula 2
+
+Nesta aula, aprofundamos o conhecimento em **manipulação de arrays** no JavaScript moderno. Exploramos métodos essenciais para leitura, transformação, filtragem e agregação de dados, compreendendo **quando usar cada um deles**. Também discutimos boas práticas, como **uso de funções nomeadas** e **escrita mais legível** para código de produção.
+
+
+## Tarefa extra (live) - Jogo: Adivinhe o Número
+
+### Objetivos da tarefa
+
+* Praticar lógica de programação com JavaScript;
+* Utilizar estruturas de repetição (`while`) e condicionais (`if/else`);
+* Gerar e comparar valores aleatórios com `Math.random()` e `Math.round()`;
+* Lidar com entrada de dados no terminal usando o pacote `prompt-sync`;
+* Exercitar a clareza no fluxo lógico e a interação com o usuário no terminal.
+
+---
+
+### Construção do jogo
+
+A proposta dessa tarefa, sugerida por colegas durante uma live (especialmente **Nando**, **Igor** e **Elno**), foi criar um pequeno jogo em JavaScript no qual o computador sorteia um número entre 1 e 100, e o usuário deve tentar adivinhar esse número através do terminal.
+
+O jogo funciona em um loop contínuo, utilizando `while (true)`, e dá dicas ao usuário dizendo se o número digitado é **maior** ou **menor** que o número sorteado. Quando o número é finalmente acertado, o jogo exibe uma mensagem de parabéns e encerra a execução com `break`.
+
+---
+
+### Geração do número aleatório
+
+Para sortear um número aleatório de 1 a 100, foi utilizado:
+
+```js
+const numero = Math.round(Math.random() * 100);
+```
+
+* `Math.random()` gera um número decimal entre 0 (inclusive) e 1 (exclusivo);
+* Multiplicando por 100, obtemos um número entre 0 e 100 (ainda com casas decimais);
+* Com `Math.round()`, o número é arredondado para o inteiro mais próximo.
+
+Essa combinação garantiu que o número sorteado estivesse sempre dentro do intervalo desejado.
+
+---
+
+### Leitura de dados com `prompt-sync`
+
+Como o Node.js não possui um input padrão nativo no terminal, foi necessário instalar e importar o pacote [`prompt-sync`](https://www.npmjs.com/package/prompt-sync):
+
+```bash
+npm install prompt-sync
+```
+
+E depois:
+
+```js
+import PromptSync from "prompt-sync";
+const input = PromptSync({ sigint: true });
+```
+
+Com isso, foi possível criar interações como:
+
+```js
+let tentativa = input("Digite um número: ");
+```
+
+O parâmetro `{ sigint: true }` garante que o programa possa ser interrompido com `Ctrl+C`.
+
+---
+
+### Estrutura do código
+
+```js
+import PromptSync from "prompt-sync";
+
+console.log("Você consegue advinhar o número que estou pensando? É um número de 1 a 100");
+
+const input = PromptSync({ sigint: true });
+const numero = Math.round(Math.random() * 100);
+
+while (true) {
+    let tentativa = input("Digite um número. ");
+    
+    if (tentativa > numero) {
+        console.clear();
+        console.log("Tente novamente! O número que você escreveu é maior que o número que estou pensando.");
+    } 
+    else if (tentativa < numero) {
+        console.clear();
+        console.log("Tente novamente! O número que você escreveu é menor que o número que estou pensando.");
+    } 
+    else if (tentativa == numero) {
+        console.log(`Parabéns, você acertou, era o ${numero} que estava pensando.`);
+        break;
+    }
+}
+```
+
+Essa estrutura usa:
+
+* `if / else if` para comparação das tentativas;
+* `console.clear()` para limpar o terminal e melhorar a experiência visual;
+* `break` para sair do loop ao acertar o número.
+
+---
+
+### Dificuldades e aprendizados
+
+Durante o desenvolvimento do jogo, surgiram várias dúvidas e descobertas importantes:
+
+* ❌ No início, o `console.log` com a mensagem de sucesso estava fora do `while`, o que causava um loop infinito;
+* 🤯 Havia confusão sobre como criar e chamar funções atribuídas a constantes;
+* ✅ Aprendi que `prompt-sync` é essencial para inputs no Node.js;
+* ✅ Compreendi a diferença entre valores flutuantes e inteiros ao usar `Math.random()` + `Math.round()`;
+* ✅ Aprendi a usar `console.clear()` para deixar a interface mais limpa;
+* ✅ Fui introduzido ao conceito de “sleep” com Promises, como analogia ao `sleep()` do Python.
+
+---
+
+### Pontos positivos ✨
+
+* Consegui estruturar as tarefas do jogo em etapas lógicas;
+* Lembrei e utilizei bem o `while` e os operadores de comparação;
+* Com a ajuda dos colegas, corrigi erros e melhorei a estrutura geral;
+* Tive contato com recursos novos como `prompt-sync`, `console.clear` e funções anônimas atribuídas a variáveis.
+
+---
+
+### Pontos a melhorar ⚠️
+
+* Preciso reforçar o uso de bibliotecas externas e como inicializar corretamente um projeto com `npm init`;
+* Ainda tenho dificuldade em organizar o raciocínio completo de um código antes de começar a escrever;
+* Demorei mais do que esperava para concluir o desafio, o que gerou insegurança;
+* Preciso praticar mais a criação e chamada de funções.
+
+---
+
+### Reflexão final
+
+> *“Foi um momento que me mostrou que ainda tenho muito a estudar. Me senti travado, demorei para resolver coisas simples, e isso me abalou um pouco. Mas participar da live me tirou da zona de conforto e me apresentou a novas formas de estudar, além de contar com a ajuda de colegas. Isso me fortaleceu e me motivou a continuar.”*
+
+Essa experiência, além de prática, foi **emocionalmente marcante**, pois revelou tanto pontos fracos quanto forças inesperadas: a coragem de persistir, a humildade para pedir ajuda, e o desejo genuíno de melhorar.
+
+---
+
+### Temas para aprofundar após a live 📚
+
+* Easy return
+* Sleep (função que simula o `sleep()` do Python)
+* Arrow functions
+* Promises
+* PromptSync ✅
+* Funções assíncronas
+* While loop ✅
+* Reduce (array)
+
+
+### Estudar:
+* Easy return
+* Sleep (Função que emula o sleep do python)
+* arrows functions
+* promises
+* PromptSync
+* Funções Assincronas 
+* While loop
+* reduce (array)
+* JS procedural x funcional
+
+
