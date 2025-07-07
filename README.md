@@ -3,8 +3,8 @@
 ## Menu
 [Aula 1 - Conheça Babel](#aula-1--conheça-babel)  
 [Aula 2 - Compreenda os metodos de arrays ](#aula-2---compreenda-os-métodos-de-arrays)  
-[Aula 3 - ](#aula-)  
-[Aula 4 - ](#aula-)  
+[Aula 3 - Conheça arrow functions ](#aula-3--conheça-arrow-functions)  
+[Aula 4 - Compreenda os operadores de spread e rest ](#aula-)  
 [Aula 5 - ](#aula-)  
 [Aula 6 - ](#aula-)  
 [Aula 7 - ](#aula-)  
@@ -340,6 +340,207 @@ Exemplo prático:
 ### ✅ Resumo da Aula 2
 
 Nesta aula, aprofundamos o conhecimento em **manipulação de arrays** no JavaScript moderno. Exploramos métodos essenciais para leitura, transformação, filtragem e agregação de dados, compreendendo **quando usar cada um deles**. Também discutimos boas práticas, como **uso de funções nomeadas** e **escrita mais legível** para código de produção.
+
+
+## Aula 3 – Conheça Arrow Functions
+
+### 🎯 Objetivos da aula
+
+Nesta aula, aprendemos a trabalhar com **Arrow Functions**, uma das funcionalidades introduzidas no ES6. Os objetivos principais foram:
+
+* Compreender o conceito e a sintaxe das Arrow Functions;
+* Comparar Arrow Functions com funções tradicionais em JavaScript;
+* Entender o comportamento do `this` dentro das Arrow Functions;
+* Saber quando é apropriado (ou não) utilizá-las no desenvolvimento.
+
+---
+
+### 🛠️ Criando a estrutura inicial
+
+O professor iniciou a aula criando um novo arquivo chamado `arrays.js` dentro da pasta `src`. Esse arquivo serviria como base para a experimentação com funções tradicionais e Arrow Functions ao longo da aula.
+
+---
+
+### 🔁 Sintaxe das Arrow Functions
+
+A estrutura de uma Arrow Function é mais enxuta em relação às funções tradicionais. Veja o exemplo:
+
+```js
+const minhaFuncao = () => {
+  console.log("Olá, mundo!");
+};
+```
+
+No exemplo acima:
+
+* A palavra-chave `function` é omitida;
+* Utiliza-se o símbolo `=>` (conhecido como “arrow”) após os parâmetros;
+* O corpo da função é definido entre `{}` como de costume.
+
+Também foi mostrado que é possível usar `return` dentro da função:
+
+```js
+const minhaFuncao = () => {
+  return "Mensagem de retorno";
+};
+```
+
+Neste caso, para visualizar a mensagem, é necessário usar:
+
+```js
+console.log(minhaFuncao());
+```
+
+---
+
+### ⚡ Retorno implícito
+
+Um recurso poderoso das Arrow Functions é o **retorno implícito**. Quando a função contém apenas uma linha de retorno, **não é necessário abrir chaves `{}` nem escrever `return`**:
+
+```js
+const saudacao = () => "Olá!";
+```
+
+Essa forma reduzida torna o código mais conciso e direto. No entanto, exige atenção para não sacrificar a legibilidade, especialmente em retornos mais complexos.
+
+---
+
+### 🔁 Retornando objetos com Arrow Functions
+
+Para retornar objetos diretamente com Arrow Functions, **é necessário envolver o objeto entre parênteses**, pois `{}` sozinho será interpretado como o corpo da função:
+
+```js
+const retornaCarro = () => ({
+  nome: "Ka",
+  marca: "Ford"
+});
+```
+
+Sem os parênteses, o JavaScript interpretaria as chaves como o corpo da função, e não como um objeto a ser retornado.
+
+---
+
+### ✂️ Supressão dos parênteses (quando possível)
+
+Se a Arrow Function recebe **apenas um argumento**, os parênteses ao redor dos parâmetros podem ser omitidos:
+
+```js
+const cumprimentar = nome => `Olá, ${nome}!`;
+```
+
+Esse recurso também ajuda a deixar o código mais limpo em funções simples ou callbacks.
+
+---
+
+### 🔃 Reescrevendo funções tradicionais
+
+O professor demonstrou como reescrever funções tradicionais em Arrow Functions, usando exemplos da aula anterior sobre arrays:
+
+```js
+// Função tradicional
+alunos.map(function(aluno) {
+  return aluno.nome;
+});
+
+// Versão com Arrow Function
+alunos.map(aluno => aluno.nome);
+```
+
+Esse processo de refatoração torna o código mais moderno, principalmente em métodos como `map`, `filter`, `forEach` e `reduce`.
+
+---
+
+### ⚠️ Limitações das Arrow Functions com `this`
+
+Arrow Functions **não têm seu próprio `this`**. Em vez disso, herdam o contexto do escopo onde foram definidas. Isso pode gerar comportamentos inesperados:
+
+* No Node.js, o `this` pode retornar `undefined`;
+* No navegador, o `this` pode referenciar o `window`.
+
+💡 Por isso, **evite utilizar Arrow Functions em métodos de objetos ou situações que dependem do `this` corretamente associado**.
+
+---
+
+### ✅ Resumo da Aula 3
+
+* Aprendemos a criar e utilizar **Arrow Functions** com sintaxe moderna e concisa;
+* Entendemos como fazer **retornos explícitos e implícitos**;
+* Descobrimos como retornar **objetos diretamente**, usando parênteses;
+* Vimos que é possível **omitir os parênteses** quando há um único argumento;
+* Reescrevemos funções tradicionais usando Arrow Functions;
+* E, por fim, compreendemos **as limitações do `this`** nesse tipo de função, destacando os cuidados necessários ao utilizá-las.
+
+
+## Aula 4 – Compreenda os Operadores de Spread e Rest
+
+### 🎯 Objetivos da aula
+
+* Compreender o operador **Rest**
+* Dominar o uso do operador **Spread**
+* Praticar a desestruturação com Rest e Spread
+
+---
+
+### 📦 Rest
+
+O operador **Rest** permite que uma função receba múltiplos parâmetros de forma agrupada em um array. A sintaxe utiliza três pontos antes do nome do parâmetro:
+
+```js
+function somarComRest(...numeros) {
+    // lógica
+}
+```
+
+**Regras importantes:**
+
+1. Só é permitido **um único parâmetro Rest** por função.
+2. Esse parâmetro deve sempre estar na **última posição da lista de argumentos**.
+
+O operador é muito útil para funções que recebem uma quantidade indefinida de argumentos.
+
+---
+
+### 🧩 Spread
+
+Já o operador **Spread** também utiliza `...variavel`, mas é usado para **espalhar os valores de arrays ou objetos**, principalmente em situações como:
+
+* Concatenação de arrays
+* Clonagem de objetos
+* Passagem de argumentos em funções
+* Desestruturação
+
+Diferente do Rest, o **Spread pode ser utilizado várias vezes** dentro do mesmo contexto, e não precisa estar no fim da lista.
+
+Exemplo comum:
+
+```js
+const frutas = ["maçã", "banana"];
+const legumes = ["cenoura", "batata"];
+
+const feira = [...frutas, ...legumes]; // ["maçã", "banana", "cenoura", "batata"]
+```
+
+---
+
+### 🔗 Concat
+
+A função `concat()` serve para **mesclar arrays**, mas o operador Spread pode ser usado para atingir o mesmo objetivo com sintaxe mais moderna:
+
+```js
+const resultado = array1.concat(array2);
+// equivale a:
+const resultado = [...array1, ...array2];
+```
+
+---
+
+### 🧠 Para estudar depois
+
+* [ ] **Leetcode**
+* [ ] **CodeForces**
+* [ ] **Beecrowd**
+
+Essas plataformas são excelentes para praticar algoritmos e aprofundar o domínio dos conceitos aprendidos com **Rest e Spread**.
 
 
 ## Tarefa extra (live) - Jogo: Adivinhe o Número
