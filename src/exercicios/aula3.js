@@ -1,6 +1,7 @@
 const saudacao = nome => (`Olá ${nome}!`)
 const dobro = x => x * 2
 
+
 const pessoas = [
     { nome: "Ana", idade: 25 },
     { nome: "Bruno", idade: 31 },

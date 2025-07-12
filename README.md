@@ -542,6 +542,47 @@ const resultado = [...array1, ...array2];
 
 Essas plataformas são excelentes para praticar algoritmos e aprofundar o domínio dos conceitos aprendidos com **Rest e Spread**.
 
+## Aula 5 - Conheça as estruturas map e set
+
+### Objetivos
+* compreender o conceito e aplicação do Map;
+* dominar a iteração através de um Map;
+* explorar a estrutura Set.
+
+### Map
+Map é uma função que vai criar dicionários pelo que entendi.
+```js 
+let meuMap = new Map();
+```
+### Funções
+#### Set
+Set é a função que faz adicionar chaves e valores no dicionário.
+```js 
+meuMap.set(chave, valor);
+```
+#### Get
+Busca um valor especifico do dicionario, a partir da chave.
+`const nome = meuMap.get(chave);`
+
+#### Size
+Diz a quantidade de chaves registradas no dicionário
+`const nome = meuMap.get(chave);`
+
+#### 
+
+### Set
+Além de ser uma função para adicionar chaves e valores no dicionário, também é um forma de criar uma base de informações que só tenha uma "variavel" ou "campo" para se registrar, nenhum valor pode se repetir.
+
+
+## Aula 6 - Funções Assincronas 
+
+### Objetivos
+* compreender os conceitos de programação assíncrona.
+* dominar o uso de Promises em JavaScript.
+* implementar programação assíncrona em situações reais.
+
+### Impressões 
+O JavaScript de forma geral foi uma linguagem sincrona, recenteme com a atualização do ECMA foi criado o metódo assincrono para trabalhar no JS, onde permite executar funções de forma paralela, essa forma de execução de código é bastante utilziada quando trabalhamos com api. 
 
 ## Tarefa extra (live) - Jogo: Adivinhe o Número
 
